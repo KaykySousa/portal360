@@ -1,24 +1,29 @@
-function hslToHex(h, s, l) {
-	l /= 100
-	const a = (s * Math.min(l, 1 - l)) / 100
-	const f = (n) => {
-		const k = (n + h / 30) % 12
-		const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
-		return Math.round(255 * color)
-			.toString(16)
-			.padStart(2, "0")
-	}
-	return `#${f(0)}${f(8)}${f(4)}`
+export function getColor(percentage) {
+	console.log(percentage)
+	const rgb1 = hexToRgb("#ddd6fe")
+	const rgb2 = hexToRgb("#5b21b6")
+
+	const r = Math.round(rgb1.r + (rgb2.r - rgb1.r) * percentage/100)
+	const g = Math.round(rgb1.g + (rgb2.g - rgb1.g) * percentage/100)
+	const b = Math.round(rgb1.b + (rgb2.b - rgb1.b) * percentage/100)
+
+	const hex = rgbToHex(r, g, b)
+
+	return hex;
 }
 
-export function getColor(percentage) {
-	const MIN_LIGHTNESS = 20
-	const MAX_LIGHTNESS = 80
+function hexToRgb(hex) {
+	const r = parseInt(hex.substring(1, 3), 16)
+	const g = parseInt(hex.substring(3, 5), 16)
+	const b = parseInt(hex.substring(5, 7), 16)
+	return { r, g, b }
+}
 
-	const lightness =
-		100 -
-		(percentage * ((MAX_LIGHTNESS - MIN_LIGHTNESS) / (100 - 0)) +
-			MIN_LIGHTNESS)
-
-	return hslToHex(325, 100, lightness)
+function rgbToHex(r, g, b) {
+	const componentToHex = function (c) {
+		const hex = c.toString(16)
+		return hex.length == 1 ? "0" + hex : hex
+	};
+	const hex = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
+	return hex
 }
