@@ -1,9 +1,8 @@
 import gini from "../assets/data/gini.json"
-import { yearSelected } from "../main"
 import { getColor } from "./colors"
 import { percentageScale } from "./scale"
 
-export function getGiniColor(country) {
+export function getGiniColor(country, yearSelected) {
 	const index = gini[country.properties.ISO_A3]
 
 	const sortededCountries = Object.values(gini)
