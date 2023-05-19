@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Portal360</title>
+		<script type="module" src="/main.js" defer></script>
 	</head>
 	<body>
 		<div id="app" class="min-vh-100 min-vw-100 bg-light">
+			<select id="year-select">
+				<option value="1980" selected>1980</option>
+				<option value="1981">1981</option>
+				<option value="1982">1982</option>
+				<option value="1983">1983</option>
+				<option value="2000">2000</option>
+				<option value="2018">2018</option>
+				<option value="2021">2021</option>
+			</select>
 			<div id="globe-container" class="w-100 h-100"></div>
 		</div>
-		<script type="module" src="/main.js"></script>
 	</body>
 </html>
