@@ -4,19 +4,21 @@ import { getColor } from "./colors"
 import { percentageScale } from "./scale"
 
 export function getGiniColor(country) {
-    const index = gini[country.properties.ISO_A3]
+	const index = gini[country.properties.ISO_A3]
 
-    const sortededCountries = Object.values(gini)
-        .sort((a, b) => (a[yearSelected] > b[yearSelected] ? 1 : -1))
-        .filter((country) => country[yearSelected])
+	const sortededCountries = Object.values(gini)
+		.sort((a, b) => (a[yearSelected] > b[yearSelected] ? 1 : -1))
+		.filter((country) => country[yearSelected])
 
-    return getColor(
-        index
-            ? percentageScale(
-                  sortededCountries[0][yearSelected],
-                  sortededCountries[sortededCountries.length - 1][yearSelected],
-                  index[yearSelected]
-              )
-            : null
-    )
+	return getColor(
+		index
+			? percentageScale(
+					sortededCountries[0][yearSelected],
+					sortededCountries[sortededCountries.length - 1][
+						yearSelected
+					],
+					index[yearSelected]
+			  )
+			: null
+	)
 }

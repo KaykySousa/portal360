@@ -12,13 +12,13 @@ let typeSelected = "gini"
 export let yearSelected = 1980
 
 const colors = {
-    gini: getGiniColor,
+	gini: getGiniColor,
 }
 
 world(globeContainer)
-    .backgroundColor("#0000")
-    .globeImageUrl(GlobeTexture)
-    .polygonsData(countries.features)
-    .polygonCapColor(colors[typeSelected])
-    .polygonStrokeColor(() => "#fff")
-    .polygonSideColor(() => "#fff")
+	.backgroundColor("#0000")
+	.globeImageUrl(GlobeTexture)
+	.polygonsData(countries.features)
+	.polygonCapColor(colors[typeSelected])
+	.polygonStrokeColor(() => "#fff")
+	.polygonSideColor(() => "#fff")
