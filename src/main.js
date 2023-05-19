@@ -9,9 +9,10 @@ const globeContainer = document.querySelector("#globe-container")
 const world = Globe()
 
 let typeSelected = "gini"
+export let yearSelected = 1980
 
 const colors = {
-    gini: getGiniColor
+    gini: getGiniColor,
 }
 
 world(globeContainer)
