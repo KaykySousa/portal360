@@ -8,7 +8,7 @@
 		<script type="module" src="/main.js" defer></script>
 	</head>
 	<body>
-		<div id="app" class="min-vh-100 min-vw-100 bg-light">
+		<div id="app" class="min-vh-100 w-100 bg-light">
 			<select id="year-select">
 				<option value="1980" selected>1980</option>
 				<option value="1981">1981</option>
@@ -18,7 +18,11 @@
 				<option value="2018">2018</option>
 				<option value="2021">2021</option>
 			</select>
-			<div id="globe-container" class="w-100 h-100"></div>
+			<select id="index-type-select">
+				<option value="gini" selected>GINI</option>
+				<option value="percapita">PER-CAPITA</option>
+			</select>
+			<div id="globe-container" class="w-100 h-100 d-flex justify-content-center align-items-center"></div>
 		</div>
 	</body>
 </html>
