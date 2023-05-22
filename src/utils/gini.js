@@ -7,20 +7,20 @@ export const gini = {
 
 	getColor(country, yearSelected) {
 		const index = this.data[country.properties.ISO_A3]
-
+		// Ordena os valores do ano selecionado do maior para o menor
 		const sortededCountries = Object.values(this.data)
-			.sort((a, b) => (a[yearSelected] > b[yearSelected] ? 1 : -1))
 			.filter((country) => country[yearSelected])
+			.sort((a, b) => (a[yearSelected] > b[yearSelected] ? 1 : -1))
 
 		return getColor(
 			index
 				? percentageScale(
-					sortededCountries[0][yearSelected],
-					sortededCountries[sortededCountries.length - 1][
-					yearSelected
-					],
-					index[yearSelected]
-				)
+						sortededCountries[0][yearSelected],
+						sortededCountries[sortededCountries.length - 1][
+							yearSelected
+						],
+						index[yearSelected]
+				  )
 				: null
 		)
 	},
