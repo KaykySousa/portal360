@@ -1,7 +1,5 @@
 export function percentageScale(min, max, value) {
-	if (!min) {
-		min = 0
-	}
-	if (!value) return null
+	if (value === "") return null
+	if (min === max) return 100
 	return ((value - min) / (max - min)) * 100
 }
