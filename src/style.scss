@@ -321,4 +321,9 @@ h1.logo {
 	background: #a2c4e1;
 	min-height: 100vh;
 	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
