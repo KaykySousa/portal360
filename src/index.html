@@ -24,10 +24,10 @@
 				</h1>
 
 				<nav id="navbar" class="navbar">
-					<ul>
-						<li><a class="nav-link active" href="#">GINI</a></li>
-						<li><a class="nav-link" href="#">PIB Per Capita</a></li>
-						<li><a class="nav-link" href="#">IDH</a></li>
+					<ul id="nav-index">
+						<li><button class="nav-link active" data-index-type="gini">GINI</button></li>
+						<li><button class="nav-link" data-index-type="pibPerCapita">PIB Per Capita</button></li>
+						<li><button class="nav-link" data-index-type="idh">IDH</button></li>
 
 						<i class="bi bi-list mobile-nav-toggle"></i>
 				</nav>
@@ -38,10 +38,6 @@
 			<div id="globe-container" class="w-100 h-100 d-flex justify-content-center align-items-center"></div>
 
 			<select id="year-select">
-			</select>
-			<select id="index-type-select">
-				<option value="gini" selected>GINI</option>
-				<option value="pibPerCapita">PIB-PER-CAPITA</option>
 			</select>
 		</main>
 		
