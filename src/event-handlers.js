@@ -11,14 +11,19 @@ function getYears() {
 		})
 	})
 	yearSelect.innerHTML = null
-	Array.from(years)
+	
+	const sortedYears = Array.from(years)
 		.sort()
+
+	sortedYears
 		.forEach((year) => {
 			yearSelect.innerHTML += `<option value="${year}">${year}</option>`
 		})
+	
+	world.updateYear(sortedYears[0])
 }
 
-getYears()
+world.globe.onGlobeReady(getYears)
 
 yearSelect.addEventListener("input", (e) => world.updateYear(e.target.value))
 
