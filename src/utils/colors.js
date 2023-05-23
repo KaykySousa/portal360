@@ -1,7 +1,7 @@
 export function getColor(percentage) {
-	if (percentage === null) return "#d4d4d4"
-	const rgb1 = hexToRgb("#ddd6fe")
-	const rgb2 = hexToRgb("#5b21b6")
+	if (percentage === null) return "#e5e5e5"
+	const rgb1 = hexToRgb("#c4b5fd")
+	const rgb2 = hexToRgb("#4c1d95")
 
 	const r = Math.round(rgb1.r + ((rgb2.r - rgb1.r) * percentage) / 100)
 	const g = Math.round(rgb1.g + ((rgb2.g - rgb1.g) * percentage) / 100)
