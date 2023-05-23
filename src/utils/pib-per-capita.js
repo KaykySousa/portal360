@@ -10,7 +10,7 @@ export const pibPerCapita = {
 		// Ordena os valores do ano selecionado do maior para o menor
 		const sortededCountries = Object.values(this.data)
 			.filter((country) => country[yearSelected])
-			.sort((a, b) => (a[yearSelected] > b[yearSelected] ? 1 : -1))
+			.sort((a, b) => (Number(a[yearSelected]) > Number(b[yearSelected]) ? 1 : -1))
 
 		return getColor(
 			index
