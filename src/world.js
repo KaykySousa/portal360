@@ -1,17 +1,21 @@
 import Globe from "globe.gl"
-import GlobeTexture from "./assets/globe/earth-day.jpg"
 import countries from "./assets/globe/countries.json"
+import GlobeTexture from "./assets/globe/earth-day.jpg"
 import { gini } from "./utils/gini"
+import { pibPerCapita } from "./utils/pib-per-capita"
 
 const globeContainer = document.querySelector("#globe-container")
 
 export class World {
 	constructor(indexTypeSelected = "gini", yearSelected = 1980) {
-		this.yearSelected = yearSelected
-		this.indexTypeSelected = indexTypeSelected
 		this.indexTypes = {
 			gini,
+			pibPerCapita,
 		}
+
+		this.yearSelected = yearSelected
+		this.indexTypeSelected = indexTypeSelected
+		this.indexType = this.indexTypes[indexTypeSelected]
 
 		this.globe = Globe()(globeContainer)
 			.backgroundColor("#0000")
@@ -19,26 +23,30 @@ export class World {
 			.polygonsData(countries.features)
 			.polygonStrokeColor(() => "#fff")
 			.polygonSideColor(() => "#fff")
-			.polygonLabel((country) => `<span class="bg-secondary rounded-1 fw-semibold fs- p-1">${country.properties.ADMIN}</span>`)
+			.polygonLabel(
+				(country) =>
+					`<span class="bg-secondary rounded-1 fw-semibold fs- p-1">${country.properties.ADMIN}</span>`
+			)
 			.height(Math.min(document.body.offsetWidth, 991))
 			.width(Math.min(document.body.offsetWidth, 991))
 
-		this.updateYear(yearSelected)
+		this._updateColors()
 	}
 
-	updateColors() {
+	_updateColors() {
 		this.globe.polygonCapColor((country) =>
-			this.indexTypes[this.indexTypeSelected].getColor(country, this.yearSelected)
+			this.indexType.getColor(country, this.yearSelected)
 		)
 	}
 
 	updateYear(year) {
 		this.yearSelected = year
-		this.updateColors()
+		this._updateColors()
 	}
 
 	updateIndexType(indexType) {
 		this.indexTypeSelected = indexType
-		this.updateColors()
+		this.indexType = this.indexTypes[this.indexTypeSelected]
+		this._updateColors()
 	}
 }
