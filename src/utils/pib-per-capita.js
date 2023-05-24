@@ -16,7 +16,7 @@ export const pibPerCapita = {
 			index
 				? percentageScale(
 						sortededCountries[0][yearSelected],
-						sortededCountries[sortededCountries.length - 1][
+						sortededCountries.at(-1)[
 							yearSelected
 						],
 						index[yearSelected]
