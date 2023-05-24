@@ -1,8 +1,8 @@
 import { world } from "./main"
 
 const yearSelect = document.getElementById("year-select")
-const indexTypeSelect = document.getElementById("index-type-select")
-const indexNavButtons  = document.querySelectorAll("#nav-index button")
+
+const indexTypeNav = document.querySelector("#nav-index")
 
 function getYears() {
 	const years = new Set()
@@ -28,11 +28,7 @@ world.globe.onGlobeReady(getYears)
 
 yearSelect.addEventListener("input", (e) => world.updateYear(e.target.value))
 
-
-indexNavButtons.forEach(button => {
-	button.addEventListener("click", () => {
-		world.updateIndexType(button.dataset.indexType)
-		getYears()
-
-	})
+indexTypeNav.addEventListener("input", (e) => {
+	world.updateIndexType(e.target.id)
+	getYears()
 })

@@ -90,8 +90,8 @@ h1.logo {
 	position: relative;
 }
 
-.navbar a,
-.navbar a:focus {
+.navbar input[type="radio"] + label,
+.navbar input[type="radio"] + label:focus {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -103,19 +103,20 @@ h1.logo {
 	transition: 0.3s;
 	text-align: center;
 	margin-right: 10px;
+	cursor: pointer;
 }
 
-.navbar a i,
-.navbar a:focus i {
+.navbar input[type="radio"] + label i,
+.navbar input[type="radio"] + label:focus i {
 	font-size: 12px;
 	line-height: 0;
 	margin-left: 5px;
 }
 
-.navbar a:hover,
-.navbar .active,
+.navbar input[type="radio"] + label:hover,
+.navbar input[type="radio"]:checked + label,
 .navbar .active:focus,
-.navbar li:hover > a {
+.navbar li:hover > label {
 	color: #47b2e4;
 	background-color: #fff;
 	border-radius: 50px;

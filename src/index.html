@@ -25,10 +25,18 @@
 
 				<nav id="navbar" class="navbar">
 					<ul id="nav-index">
-						<li><button class="nav-link active" data-index-type="gini">GINI</button></li>
-						<li><button class="nav-link" data-index-type="pibPerCapita">PIB Per Capita</button></li>
-						<li><button class="nav-link" data-index-type="idh">IDH</button></li>
-
+						<li>
+							<input type="radio" id="gini" name="index" class="d-none" checked>
+							<label for="gini" class="nav-link">GINI</label>
+						</li>
+						<li>
+							<input type="radio" id="gdp-per-capita" name="index" class="d-none">
+							<label for="gdp-per-capita" class="nav-link">PIB Per Capita</label>
+						</li>
+						<li>
+							<input type="radio" id="hdi" name="index" class="d-none">
+							<label for="hdi" class="nav-link">IDH</label>
+						</li>
 						<i class="bi bi-list mobile-nav-toggle"></i>
 				</nav>
 			</div>
