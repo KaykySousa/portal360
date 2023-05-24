@@ -1,9 +1,9 @@
-import pibPerCapitaData from "../assets/data/per-capita.json"
+import gdpPerCapitaData from "../assets/data/gdp-per-capita.json"
 import { getColor } from "./colors"
 import { percentageScale } from "./scale"
 
-export const pibPerCapita = {
-	data: pibPerCapitaData,
+export const gdpPerCapita = {
+	data: gdpPerCapitaData,
 
 	getColor(country, yearSelected) {
 		const index = this.data[country.properties.ISO_A3]
