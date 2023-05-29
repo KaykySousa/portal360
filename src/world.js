@@ -4,11 +4,16 @@ import GlobeTexture from "./assets/globe/earth-day.jpg"
 import { gini } from "./utils/gini"
 import { gdpPerCapita } from "./utils/gdp-per-capita"
 import { hdi } from "./utils/hdi"
+import { renderChart } from "./utils/chart"
 
 const globeContainer = document.querySelector("#globe-container")
 
 export class World {
-	constructor(indexTypeSelected = "gini", yearSelected = 1980) {
+	constructor(
+		indexTypeSelected = "gini",
+		yearSelected = 1980,
+		countrySelectedProperties = null
+	) {
 		this.indexTypes = {
 			gini,
 			"gdp-per-capita": gdpPerCapita,
@@ -18,6 +23,7 @@ export class World {
 		this.yearSelected = yearSelected
 		this.indexTypeSelected = indexTypeSelected
 		this.indexType = this.indexTypes[indexTypeSelected]
+		this.countrySelectedProperties = countrySelectedProperties
 
 		this.globe = Globe()(globeContainer)
 			.backgroundColor("#0000")
@@ -38,6 +44,7 @@ export class World {
 						: 0.01
 				)
 			})
+
 			.height(Math.min(document.body.offsetWidth, 991))
 			.width(Math.min(document.body.offsetWidth, 991))
 
@@ -59,5 +66,19 @@ export class World {
 		this.indexTypeSelected = indexType
 		this.indexType = this.indexTypes[this.indexTypeSelected]
 		this._updateColors()
+	}
+
+	updateCountrySelected(country) {
+		this.countrySelectedProperties = country.properties
+		const chartData = Object.entries(
+			this.indexType.data[this.countrySelectedProperties.ISO_A3]
+		)
+			.filter(([year, value]) => Number(year) && value !== "")
+			.map(([year, value]) => ({
+				x: Number(year),
+				y: parseFloat(value),
+			}))
+			.sort((a, b) => a.x - b.x)
+		renderChart(chartData)
 	}
 }
