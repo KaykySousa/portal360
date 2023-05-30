@@ -12,17 +12,34 @@
 
 	<body>
 		<div class="min-vh-100 w-100">
-			<header id="header" class="fixed-top">
-				<div class="container d-flex align-items-center">
-					<h1 class="logo me-auto">
-						<a href="index.html" class="logo me-auto">
-							<img src="/logo.png" alt="" />
-						</a>
-					</h1>
+			<header class="navbar navbar-expand-sm fixed-top navbar-dark">
+				<div class="container">
+					<a href="index.html" class="navbar-brand">
+						<img
+							src="/logo.png"
+							alt="Logo do Portal 360"
+							class="logo"
+						/>
+					</a>
 
-					<nav id="navbar" class="navbar">
-						<ul id="nav-index">
-							<li>
+					<button
+						class="navbar-toggler border-0"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#globe-controls"
+						aria-controls="globe-controls"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div
+						class="container collapse navbar-collapse justify-content-end"
+						id="globe-controls"
+					>
+						<ul class="navbar-nav gap-2" id="nav-index">
+							<li class="nav-item">
 								<input
 									type="radio"
 									id="gini"
@@ -32,7 +49,7 @@
 								/>
 								<label for="gini" class="nav-link">GINI</label>
 							</li>
-							<li>
+							<li class="nav-item">
 								<input
 									type="radio"
 									id="gdp-per-capita"
@@ -43,7 +60,7 @@
 									>PIB Per Capita</label
 								>
 							</li>
-							<li>
+							<li class="nav-item">
 								<input
 									type="radio"
 									id="hdi"
@@ -52,21 +69,23 @@
 								/>
 								<label for="hdi" class="nav-link">IDH</label>
 							</li>
-							<li>
-								<select id="year-select"></select>
+							<li class="nav-item">
+								<select
+									id="year-select"
+									class="nav-link"
+								></select>
 							</li>
-							<i class="bi bi-list mobile-nav-toggle"></i>
 						</ul>
-					</nav>
+					</div>
 				</div>
 			</header>
 
 			<div
 				id="globe-container"
-				class="w-100 h-100 d-flex justify-content-center align-items-center"
+				class="w-100 min-vh-100 d-flex justify-content-center align-items-center bg-light"
 			></div>
 
-			<main id="main">
+			<!-- <main id="main">
 				<section id="about" class="about">
 					<div class="container" data-aos="fade-up">
 						<div class="section-title">
@@ -158,37 +177,29 @@
 						/>
 					</div>
 				</section>
-			</main>
-			<div
-				id="overlay"
-				class="d-none position-absolute top-0 start-0 h-100 w-100 bg-danger bg-opacity-25 justify-content-center align-items-center"
-			>
+			</main> -->
+
+			<div class="modal fade" id="data-modal">
 				<div
-					id="modal"
-					class="w-50 h-75 bg-light d-flex flex-column align-items-center py-4 px-4 gap-3"
+					class="modal-dialog modal-lg modal-fullscreen-sm-down modal-dialog-centered"
 				>
-					<div
-						id="modal-header"
-						class="d-flex justify-content-between align-items-center flex-row w-100"
-					>
-						<div></div>
-						<p id="modal-title" class="fs-4 fw-semibold m-0"></p>
-						<button id="modal-close">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								fill="currentColor"
-								class="bi bi-x-circle-fill"
-								viewBox="0 0 16 16"
-							>
-								<path
-									d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
-								/>
-							</svg>
-						</button>
+					<div class="modal-content">
+						<div class="modal-header justify-content-center">
+							<h1
+								id="modal-title"
+								class="modal-title fs-4 fw-semibold"
+							></h1>
+							<button
+								type="button"
+								class="btn-close m-0 position-absolute end-0 me-3"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div class="modal-body">
+							<canvas id="modal-chart"></canvas>
+						</div>
 					</div>
-					<canvas id="modal-chart"></canvas>
 				</div>
 			</div>
 		</div>
