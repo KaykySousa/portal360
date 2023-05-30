@@ -1,12 +1,11 @@
 import { world } from "./main"
+import { Modal } from "bootstrap"
 
 const yearSelect = document.getElementById("year-select")
-
-const indexTypeNav = document.querySelector("#nav-index")
-
-const overlay = document.getElementById("overlay")
+const indexTypeNav = document.getElementById("nav-index")
 const modalTitle = document.getElementById("modal-title")
-const modalCloseButton = document.getElementById("modal-close")
+
+const dataModal = new Modal("#data-modal")
 
 function getYears() {
 	const years = new Set()
@@ -31,6 +30,8 @@ world.globe.onGlobeReady(getYears)
 yearSelect.addEventListener("input", (e) => world.updateYear(e.target.value))
 
 indexTypeNav.addEventListener("input", (e) => {
+	if (e.target.name !== "index") return
+
 	world.updateIndexType(e.target.id)
 	getYears()
 })
@@ -38,15 +39,5 @@ indexTypeNav.addEventListener("input", (e) => {
 world.globe.onPolygonClick((country) => {
 	world.updateCountrySelected(country)
 	modalTitle.innerText = world.countrySelectedProperties.ADMIN
-	overlay.classList.replace("d-none", "d-flex")
-})
-
-modalCloseButton.addEventListener("click", () => {
-	overlay.classList.replace("d-flex", "d-none")
-})
-
-overlay.addEventListener("click", (e) => {
-	if (e.target === overlay) {
-		overlay.classList.replace("d-flex", "d-none")
-	}
+	dataModal.show()
 })
