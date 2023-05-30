@@ -202,6 +202,78 @@
 					</div>
 				</div>
 			</div>
+
+			<button
+				type="button"
+				class="btn btn-primary"
+				data-bs-toggle="modal"
+				data-bs-target="#newsletter-modal"
+			>
+				Launch newsletter modal
+			</button>
+
+			<div class="modal fade" id="newsletter-modal">
+				<div
+					class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered"
+				>
+					<div class="modal-content">
+						<div class="modal-header flex-column">
+							<div
+								class="w-100 justify-content-center align-items-center d-flex"
+							>
+								<h1 class="modal-title fs-4 fw-semibold">
+									Newsletter
+								</h1>
+								<button
+									type="button"
+									class="btn-close m-0 position-absolute end-0 me-3"
+									data-bs-dismiss="modal"
+									aria-label="Close"
+								></button>
+							</div>
+							<p class="text-center m-0 mt-2">
+								Cadastre-se em nossa Newsletter para obter mais
+								informações sobre a disparidade social no mundo!
+							</p>
+						</div>
+						<form id="newsletter-form" class="modal-body">
+							<div class="mb-3">
+								<label
+									for="newsletter-name-input"
+									class="form-label"
+									>Nome</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									id="newsletter-name-input"
+									name="name"
+									placeholder="João da Silva"
+									required
+								/>
+							</div>
+							<div class="mb-3">
+								<label
+									for="newsletter-email-input"
+									class="form-label"
+									>E-mail</label
+								>
+								<input
+									type="email"
+									class="form-control"
+									id="newsletter-email-input"
+									name="email"
+									placeholder="joao.silva@email.com"
+									required
+								/>
+							</div>
+							<button type="submit" class="btn btn-primary w-100">
+								Cadastrar-se
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
