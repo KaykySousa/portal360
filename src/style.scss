@@ -1,7 +1,9 @@
 @import "bootstrap/scss/bootstrap";
 
+$primary-color: #60a5fa;
+
 header {
-	background: #60a5fa;
+	background: $primary-color;
 	box-shadow: 0px 0px 4px #000;
 }
 
@@ -23,11 +25,73 @@ header {
 	.nav-link:hover,
 	select.nav-link {
 		background: #fff;
-		color: #60a5fa;
+		color: $primary-color;
 	}
 
 	select.nav-link {
 		outline: none;
 		min-width: 80px;
+	}
+}
+
+#table-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 16px;
+}
+
+#table {
+	width: 75%;
+
+	thead {
+		background-color: #60a5fa;
+		color: #fff;
+	}
+
+	tr {
+		&:nth-of-type(odd) {
+			background-color: transparent;
+		}
+		&:nth-of-type(even) {
+			background-color: #d4d4d4;
+		}
+	}
+
+	th {
+		cursor: pointer;
+		&:nth-child(2) {
+			border-left: 1px solid #5793ef;
+			border-right: 1px solid #5793ef;
+		}
+	}
+
+	td {
+		&:nth-child(2) {
+			border-left: 1px solid #a3a3a3;
+			border-right: 1px solid #a3a3a3;
+		}
+	}
+
+	th,
+	td {
+		&:nth-child(1) {
+			width: 75%;
+		}
+		width: 12.5%;
+		height: 44px;
+		max-width: 100%;
+		padding: 4px 8px;
+	}
+
+	@media screen and (max-width: 576px) {
+		width: 100vw;
+		th,
+		td {
+			&:nth-child(1) {
+				width: 50%;
+			}
+			width: 25%;
+		}
 	}
 }
