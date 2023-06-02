@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		<div class="min-vh-100 w-100">
+		<div class="min-vh-100 w-100 bg-light">
 			<header class="navbar navbar-expand-sm fixed-top navbar-dark">
 				<div class="container">
 					<a href="index.html" class="navbar-brand">
@@ -82,7 +82,7 @@
 
 			<div
 				id="globe-container"
-				class="w-100 min-vh-100 d-flex justify-content-center align-items-center bg-light"
+				class="w-100 min-vh-100 d-flex justify-content-center align-items-center"
 			></div>
 
 			<!-- <main id="main">
@@ -178,6 +178,21 @@
 					</div>
 				</section>
 			</main> -->
+
+			<div id="table-container">
+				<table id="table">
+					<thead>
+						<tr id="table-head">
+							<th data-type="name" data-order="asc">País</th>
+							<th data-type="year" data-order="asc">
+								Ano mais recente
+							</th>
+							<th data-type="index" data-order="asc">Índice</th>
+						</tr>
+					</thead>
+					<tbody id="table-body"></tbody>
+				</table>
+			</div>
 
 			<div class="modal fade" id="data-modal">
 				<div

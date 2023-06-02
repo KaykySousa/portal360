@@ -1,12 +1,14 @@
 import { world } from "./main"
 import { Modal } from "bootstrap"
-import { collection, addDoc, serverTimestamp } from "firebase/firestore"
+import { collection, addDoc, serverTimestamp, doc } from "firebase/firestore"
 import { db } from "./services/firebase"
+import { renderTable } from "./utils/table"
 
 const yearSelect = document.getElementById("year-select")
 const indexTypeNav = document.getElementById("nav-index")
 const modalTitle = document.getElementById("modal-title")
 const newsletterForm = document.getElementById("newsletter-form")
+const tableHead = document.getElementById("table-head")
 
 const dataModal = new Modal("#data-modal")
 const newsletterModal = new Modal("#newsletter-modal")
@@ -38,6 +40,7 @@ indexTypeNav.addEventListener("input", (e) => {
 
 	world.updateIndexType(e.target.id)
 	getYears()
+	renderTable()
 })
 
 world.globe.onPolygonClick((country) => {
@@ -71,3 +74,17 @@ newsletterForm.addEventListener("submit", async (e) => {
 		)
 	}
 })
+
+Array.from(tableHead.children).forEach((children) => {
+	children.addEventListener("click", (e) => {
+		const { order, type } = e.target.dataset
+		if (order == "asc") {
+			e.target.dataset.order = "desc"
+			return renderTable(type, false)
+		}
+		e.target.dataset.order = "asc"
+		return renderTable(type, true)
+	})
+})
+
+renderTable()
