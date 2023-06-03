@@ -1,4 +1,6 @@
 import { world } from "../main"
+import { getCoordsByCountry, getCountryByISOA3 } from "./country"
+const yearSelect = document.getElementById("year-select")
 
 export function renderTable(sortMethod = "name", ascending = true) {
 	const tableBody = document.getElementById("table-body")
@@ -12,6 +14,7 @@ export function renderTable(sortMethod = "name", ascending = true) {
 				countryData["Country Name"],
 				lastYear,
 				countryData[lastYear],
+				countryData["Country Code"],
 			]
 		})
 		.sort((a, b) => {
@@ -28,6 +31,20 @@ export function renderTable(sortMethod = "name", ascending = true) {
 
 	data.forEach((rowData) => {
 		const tableRow = document.createElement("tr")
+
+		tableRow.addEventListener("click", () => {
+			world.updateYear(rowData[1])
+			yearSelect.value = rowData[1]
+
+			const country = getCountryByISOA3(rowData[3])
+			const coords = getCoordsByCountry(country)
+			world.turnGlobe({
+				...coords,
+				altitude: 1.5,
+			})
+			document.body.scrollTop = 0
+			document.documentElement.scrollTop = 0
+		})
 
 		const name = document.createElement("td")
 		name.textContent = rowData[0]
