@@ -6,11 +6,9 @@ import { renderTable } from "./utils/table"
 
 const yearSelect = document.getElementById("year-select")
 const indexTypeNav = document.getElementById("nav-index")
-const modalTitle = document.getElementById("modal-title")
 const newsletterForm = document.getElementById("newsletter-form")
 const tableHeadItems = document.querySelectorAll("#table-head th")
 
-const dataModal = new Modal("#data-modal")
 const newsletterModal = new Modal("#newsletter-modal")
 
 function getYears() {
@@ -41,12 +39,6 @@ indexTypeNav.addEventListener("input", (e) => {
 	world.updateIndexType(e.target.id)
 	getYears()
 	renderTable()
-})
-
-world.globe.onPolygonClick((country) => {
-	world.updateCountrySelected(country)
-	modalTitle.innerText = world.countrySelectedProperties.ADMIN
-	dataModal.show()
 })
 
 newsletterForm.addEventListener("submit", async (e) => {

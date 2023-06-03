@@ -4,7 +4,7 @@ import GlobeTexture from "./assets/globe/earth-day.jpg"
 import { gini } from "./utils/gini"
 import { gdpPerCapita } from "./utils/gdp-per-capita"
 import { hdi } from "./utils/hdi"
-import { renderChart } from "./utils/chart"
+import { renderIndexChart } from "./utils/chart"
 
 const globeContainer = document.querySelector("#globe-container")
 
@@ -44,6 +44,11 @@ export class World {
 						: 0.01
 				)
 			})
+			.onPolygonClick((polygon, event, { lat, lng }) => {
+				this.countrySelectedProperties = polygon.properties
+				renderIndexChart()
+				this.turnGlobe({ lat, lng })
+			})
 
 			.height(Math.min(document.body.offsetWidth, 991))
 			.width(Math.min(document.body.offsetWidth, 991))
@@ -57,6 +62,10 @@ export class World {
 		)
 	}
 
+	turnGlobe(coords) {
+		this.globe.pointOfView(coords, 500)
+	}
+
 	updateYear(year) {
 		this.yearSelected = year
 		this._updateColors()
@@ -66,19 +75,5 @@ export class World {
 		this.indexTypeSelected = indexType
 		this.indexType = this.indexTypes[this.indexTypeSelected]
 		this._updateColors()
-	}
-
-	updateCountrySelected(country) {
-		this.countrySelectedProperties = country.properties
-		const chartData = Object.entries(
-			this.indexType.data[this.countrySelectedProperties.ISO_A3]
-		)
-			.filter(([year, value]) => Number(year) && value !== "")
-			.map(([year, value]) => ({
-				x: Number(year),
-				y: parseFloat(value),
-			}))
-			.sort((a, b) => a.x - b.x)
-		renderChart(chartData)
 	}
 }
