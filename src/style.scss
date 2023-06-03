@@ -51,6 +51,8 @@ header {
 	}
 
 	tr {
+		cursor: pointer;
+
 		&:nth-of-type(odd) {
 			background-color: transparent;
 		}
