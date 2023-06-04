@@ -112,3 +112,92 @@ header {
 		}
 	}
 }
+
+.developers {
+	background: #dbeafe;
+
+	.developer {
+		display: block;
+		height: 80px;
+		width: 80px;
+		transition: all 0.2s;
+		filter: grayscale(100%);
+
+		&:hover {
+			transform: scale(1.1);
+			filter: grayscale(0%);
+		}
+	}
+}
+
+.section-title {
+	text-align: center;
+}
+
+.section-title h2 {
+	font-size: 32px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+	color: #37517e;
+}
+
+.section-title h2::before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 120px;
+	height: 1px;
+	background: #ddd;
+	bottom: 1px;
+	left: calc(50% - 60px);
+}
+
+.section-title h2::after {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 40px;
+	height: 3px;
+	background: $primary-color;
+	bottom: 0;
+	left: calc(50% - 20px);
+}
+
+.section-title p {
+	margin-bottom: 0;
+}
+
+.about-content {
+	text-align: center;
+}
+
+.container-text {
+	max-width: 768px;
+}
+
+.inequality .container {
+	max-width: 992px;
+}
+
+.inequality-card {
+	background: #fff;
+
+	p {
+		text-align: justify;
+	}
+
+	img {
+		object-fit: cover;
+
+		@media screen and (min-width: 768px) {
+			width: 40%;
+		}
+	}
+
+	@media screen and (min-width: 768px) {
+		height: 400px;
+	}
+}
