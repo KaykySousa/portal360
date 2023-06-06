@@ -1,5 +1,4 @@
-import { world } from "./main"
-import { Modal } from "bootstrap"
+import { dataModal, newsletterModal, world } from "./main"
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"
 import { db } from "./services/firebase"
 import { renderTable } from "./utils/table"
@@ -7,9 +6,10 @@ import { renderTable } from "./utils/table"
 const yearSelect = document.getElementById("year-select")
 const indexTypeNav = document.getElementById("nav-index")
 const newsletterForm = document.getElementById("newsletter-form")
+const compareButton = document.getElementById("compare-button")
+const fixedCompareButton = document.getElementById("fixed-compare-button")
+const clearCompareButton = document.getElementById("clear-compare-button")
 const tableHeadItems = document.querySelectorAll("#table-head th")
-
-const newsletterModal = new Modal("#newsletter-modal")
 
 function getYears() {
 	const years = new Set()
@@ -65,6 +65,20 @@ newsletterForm.addEventListener("submit", async (e) => {
 			"Erro ao se cadastrar na newsletter.\nTente novamente mais tarde."
 		)
 	}
+})
+
+compareButton.addEventListener("click", () => {
+	dataModal.hide()
+	world.compare = true
+	fixedCompareButton.classList.remove("d-none")
+	clearCompareButton.classList.remove("d-none")
+})
+
+clearCompareButton.addEventListener("click", () => {
+	dataModal.hide()
+	world.compare = false
+	fixedCompareButton.classList.add("d-none")
+	clearCompareButton.classList.add("d-none")
 })
 
 tableHeadItems.forEach((headItem) => {

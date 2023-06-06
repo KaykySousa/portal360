@@ -288,6 +288,16 @@
 				</table>
 			</div>
 
+			<button
+				type="button"
+				class="btn btn-primary d-none"
+				data-bs-toggle="modal"
+				data-bs-target="#data-modal"
+				id="fixed-compare-button"
+			>
+				Abrir comparação
+			</button>
+
 			<div class="modal fade" id="data-modal">
 				<div
 					class="modal-dialog modal-lg modal-fullscreen-sm-down modal-dialog-centered"
@@ -307,6 +317,17 @@
 						</div>
 						<div class="modal-body">
 							<canvas id="modal-chart"></canvas>
+						</div>
+						<div class="modal-footer">
+							<button
+								id="clear-compare-button"
+								class="btn btn-outline-danger d-none"
+							>
+								Limpar Comparação
+							</button>
+							<button id="compare-button" class="btn btn-primary">
+								Comparar Dados
+							</button>
 						</div>
 					</div>
 				</div>
