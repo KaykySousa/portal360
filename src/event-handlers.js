@@ -9,7 +9,7 @@ const newsletterForm = document.getElementById("newsletter-form")
 const compareButton = document.getElementById("compare-button")
 const fixedCompareButton = document.getElementById("fixed-compare-button")
 const clearCompareButton = document.getElementById("clear-compare-button")
-const tableHeadItems = document.querySelectorAll("#table-head th")
+const tableHeadItems = document.querySelectorAll("#table-head th[data-type]")
 
 function getYears() {
 	const years = new Set()

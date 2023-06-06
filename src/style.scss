@@ -64,7 +64,7 @@ header {
 	th {
 		cursor: pointer;
 
-		&:nth-child(2) {
+		&:nth-child(3) {
 			border-left: 1px solid #5793ef;
 			border-right: 1px solid #5793ef;
 		}
@@ -84,7 +84,7 @@ header {
 	}
 
 	td {
-		&:nth-child(2) {
+		&:nth-child(3) {
 			border-left: 1px solid #a3a3a3;
 			border-right: 1px solid #a3a3a3;
 		}
@@ -93,9 +93,12 @@ header {
 	th,
 	td {
 		&:nth-child(1) {
-			width: 75%;
+			width: min-content;
 		}
-		width: 12.5%;
+		&:nth-child(2) {
+			width: 65%;
+		}
+		width: 17.5%;
 		height: 44px;
 		max-width: 100%;
 		padding: 4px 8px;
