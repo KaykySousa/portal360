@@ -13,3 +13,13 @@ export function getCountryByISOA3(isoa3) {
 		(country) => country.properties.ISO_A3 === isoa3
 	)
 }
+
+export function ISOA3toISOA2(isoa3) {
+	const country = countries.features.find(
+		(country) => country.properties.ISO_A3 === isoa3
+	)
+
+	if (!country) return
+
+	return country.properties.ISO_A2.toLowerCase()
+}
