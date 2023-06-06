@@ -1,40 +1,64 @@
 import { Chart } from "chart.js/auto"
-import { world } from "../main"
-import { Modal } from "bootstrap"
+import { dataModal, world } from "../main"
 
 const modalTitle = document.getElementById("modal-title")
-const dataModal = new Modal("#data-modal")
 
 export function renderIndexChart() {
-	const chartData = Object.entries(
-		world.indexType.data[world.countrySelectedProperties.ISO_A3]
+	const countriesSelectedProperties = Array.from(
+		world.countriesSelectedProperties
 	)
-		.filter(([year, value]) => Number(year) && value !== "")
-		.map(([year, value]) => ({
-			x: Number(year),
-			y: parseFloat(value),
-		}))
-		.sort((a, b) => a.x - b.x)
+
+	const chartData = countriesSelectedProperties.map(
+		(countrySelectedProperties) => {
+			const chartCountryData = Object.entries(
+				world.indexType.data[countrySelectedProperties.ISO_A3]
+			)
+				.filter(([year, value]) => Number(year) && value !== "")
+				.map(([year, value]) => ({
+					x: Number(year),
+					y: parseFloat(value),
+				}))
+				.sort((a, b) => a.x - b.x)
+
+			return {
+				label: `${world.indexTypeSelected.toLocaleUpperCase()} - ${
+					countrySelectedProperties.ADMIN
+				}`,
+				data: chartCountryData,
+				tension: 0.1,
+			}
+		}
+	)
+
+	console.log(chartData)
+
 	renderChart(chartData)
-	modalTitle.innerText = world.countrySelectedProperties.ADMIN
+	modalTitle.innerText =
+		countriesSelectedProperties.length === 1
+			? countriesSelectedProperties[0].ADMIN
+			: "Comparação"
 	dataModal.show()
 }
 
 export function renderChart(chartData) {
 	const ctx = document.getElementById("modal-chart")
+
 	if (Chart.getChart(ctx)) Chart.getChart(ctx).destroy()
+
+	let minX = Infinity
+	let maxX = -Infinity
+
+	chartData.forEach((data) => {
+		data.data.forEach(({ x }) => {
+			minX = Math.min(minX, x)
+			maxX = Math.max(maxX, x)
+		})
+	})
+
 	new Chart(ctx, {
 		type: "line",
 		data: {
-			datasets: [
-				{
-					label: `${world.indexTypeSelected.toLocaleUpperCase()} - ${
-						world.countrySelectedProperties.ADMIN
-					}`,
-					data: chartData,
-					tension: 0.1,
-				},
-			],
+			datasets: chartData,
 		},
 		options: {
 			responsive: true,
@@ -46,8 +70,8 @@ export function renderChart(chartData) {
 			scales: {
 				x: {
 					type: "linear",
-					min: chartData[0].x,
-					max: chartData.at(-1).x,
+					min: minX,
+					max: maxX,
 					title: {
 						text: "Ano",
 						display: true,

@@ -9,11 +9,7 @@ import { renderIndexChart } from "./utils/chart"
 const globeContainer = document.querySelector("#globe-container")
 
 export class World {
-	constructor(
-		indexTypeSelected = "gini",
-		yearSelected = 1980,
-		countrySelectedProperties = null
-	) {
+	constructor(indexTypeSelected = "gini", yearSelected = 1980) {
 		this.indexTypes = {
 			gini,
 			"gdp-per-capita": gdpPerCapita,
@@ -23,7 +19,8 @@ export class World {
 		this.yearSelected = yearSelected
 		this.indexTypeSelected = indexTypeSelected
 		this.indexType = this.indexTypes[indexTypeSelected]
-		this.countrySelectedProperties = countrySelectedProperties
+		this.countriesSelectedProperties = new Set()
+		this.compare = false
 
 		this.globe = Globe()(globeContainer)
 			.backgroundColor("#0000")
@@ -33,7 +30,7 @@ export class World {
 			.polygonSideColor(() => "#fff")
 			.polygonLabel(
 				(country) =>
-					`<span class="bg-secondary rounded-1 fw-semibold fs- p-1">${country.properties.ADMIN}</span>`
+					`<span class="bg-secondary rounded-1 fw-semibold p-1">${country.properties.ADMIN}</span>`
 			)
 			.onPolygonHover((polygon) => {
 				if (!polygon) return this.globe.polygonAltitude(0.01)
@@ -45,9 +42,20 @@ export class World {
 				)
 			})
 			.onPolygonClick((polygon, event, { lat, lng }) => {
-				this.countrySelectedProperties = polygon.properties
-				renderIndexChart()
 				this.turnGlobe({ lat, lng })
+
+				if (!this.compare) this.countriesSelectedProperties.clear()
+
+				if (
+					!this.indexType.data[polygon.properties.ISO_A3] ||
+					Object.values(
+						this.indexType.data[polygon.properties.ISO_A3]
+					).every((value) => !value || !Number(value))
+				)
+					return alert("Não foram encontrados dados do país.")
+
+				this.countriesSelectedProperties.add(polygon.properties)
+				renderIndexChart()
 			})
 
 			.height(Math.min(document.body.offsetWidth, 991))
