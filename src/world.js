@@ -30,7 +30,10 @@ export class World {
 			.polygonSideColor(() => "#fff")
 			.polygonLabel(
 				(country) =>
-					`<span class="bg-secondary rounded-1 fw-semibold p-1">${country.properties.ADMIN}</span>`
+					`<div class="bg-secondary rounded-1 fw-semibold p-1">
+						<img src="https://flagcdn.com/24x18/${country.properties.ISO_A2.toLowerCase()}.webp"/>
+						${country.properties.ADMIN}
+					</div>`
 			)
 			.onPolygonHover((polygon) => {
 				if (!polygon) return this.globe.polygonAltitude(0.01)
