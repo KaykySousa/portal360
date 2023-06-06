@@ -1,5 +1,5 @@
 import { world } from "../main"
-import { getCoordsByCountry, getCountryByISOA3 } from "./country"
+import { getCoordsByCountry, getCountryByISOA3, ISOA3toISOA2 } from "./country"
 const yearSelect = document.getElementById("year-select")
 
 export function renderTable(sortMethod = "name", ascending = true) {
@@ -45,6 +45,16 @@ export function renderTable(sortMethod = "name", ascending = true) {
 			document.body.scrollTop = 0
 			document.documentElement.scrollTop = 0
 		})
+
+		const flag = document.createElement("td")
+		if (ISOA3toISOA2(rowData[3])) {
+			const flagImg = document.createElement("img")
+			flagImg.src = `https://flagcdn.com/24x18/${ISOA3toISOA2(
+				rowData[3]
+			)}.webp`
+			flag.appendChild(flagImg)
+		}
+		tableRow.appendChild(flag)
 
 		const name = document.createElement("td")
 		name.textContent = rowData[0]
